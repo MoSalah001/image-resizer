@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/index.css">
+    <script src="./js/index.js"></script>
+    <title>Image Resizer</title>
+</head>
+<body>
+    <header>
+        <h1>Image Resizer</h1>
+        <h2>Resize your images on the go</h2>
+    </header>
+    <div id="form-div">
+        <form action="/api" method="post", enctype="multipart/form-data" name="uploadForm" id="form">
+            <label for="width">Width</label>
+            <input type="text" name="width" value="200" id="width">
+            <label for="height">Height</label>
+            <input type="text" name="height" value="200" id="height">
+            <input type="file" name="image" id="imgName" accept="image/jpg, image/jpeg, image/png">
+            <p class="hide" id="fileName"></p>
+            <button id="btn">submit</button>
+        </form>
+    </div>
+</body>
+</html>

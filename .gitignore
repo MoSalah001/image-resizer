@@ -1,0 +1,5 @@
+node_modules
+dist/routes/api/full-images
+dist/routes/api/thumb
+src/routes/api/full-images
+src/routes/api/thumb
