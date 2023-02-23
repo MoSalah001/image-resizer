@@ -34,7 +34,7 @@ describe('resize function suite tests', () => {
 });
 describe('server routes suite tests', () => {
     it('it should serve the image when found-this is correct', () => __awaiter(void 0, void 0, void 0, function* () {
-        const res = yield app.get('/api/image?image=image-5&width=200&height=200&ext=png');
+        const res = yield app.get('/api/image?image=image-0&width=400&height=400&ext=jpg');
         expect(res.statusCode).toBe(200);
     }));
     it('it should serve the image when found-this should fail', () => __awaiter(void 0, void 0, void 0, function* () {

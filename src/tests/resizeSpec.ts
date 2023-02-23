@@ -25,7 +25,7 @@ describe('resize function suite tests', () => {
 describe('server routes suite tests', () => {
   it('it should serve the image when found-this is correct', async () => {
     const res = await app.get(
-      '/api/image?image=image-5&width=200&height=200&ext=png'
+      '/api/image?image=image-0&width=400&height=400&ext=jpg'
     );
     expect(res.statusCode).toBe(200);
   });
