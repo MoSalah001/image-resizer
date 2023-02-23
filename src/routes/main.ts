@@ -17,7 +17,7 @@ interface fileName {
   mimetype: string;
 }
 const routes = express.Router();
-routes.post('/', (req, res) => {
+routes.post('/', (req: express.Request, res: express.Response): object => {
   const apiPath = path.join(__dirname, `/api/full-images/`);
   if (!fs.existsSync(apiPath)) {
     fs.mkdirSync(apiPath, { recursive: true });
@@ -76,7 +76,7 @@ routes.post('/', (req, res) => {
   return req.pipe(busboy);
 });
 
-routes.get('/image', (req, res) => {
+routes.get('/image', (req: express.Request, res: express.Response): void => {
   const file = path.join(
     __dirname,
     `/api/thumb/${req.query.image}_${req.query.width}_${req.query.height}.${req.query.ext}`
