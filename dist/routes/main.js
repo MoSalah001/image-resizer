@@ -27,22 +27,27 @@ routes.post('/', (req, res) => {
     const busboy = (0, busboy_1.default)({ headers: req.headers });
     // "@ts-expect-error"
     busboy.on('file', (fieldname, file, filename) => {
-        const length = fs_1.default.readdirSync(apiPath).length;
-        const index = filename.filename.indexOf('.');
-        const ext = filename.filename.slice(index);
-        const imageName = `image-${length}`;
-        const saveOrg = path_1.default.join(__dirname, `/api/full-images/` + imageName + `${ext}`);
-        fileData = {
-            path: saveOrg,
-            name: imageName,
-            width: 0,
-            height: 0,
-            ext: ext,
-        };
-        if (!fs_1.default.existsSync(apiPath)) {
-            fs_1.default.mkdirSync(apiPath, { recursive: true });
+        if (filename.filename) {
+            const length = fs_1.default.readdirSync(apiPath).length;
+            const index = filename.filename.indexOf('.');
+            const ext = filename.filename.slice(index);
+            const imageName = `image-${length}`;
+            const saveOrg = path_1.default.join(__dirname, `/api/full-images/` + imageName + `${ext}`);
+            fileData = {
+                path: saveOrg,
+                name: imageName,
+                width: 0,
+                height: 0,
+                ext: ext,
+            };
+            if (!fs_1.default.existsSync(apiPath)) {
+                fs_1.default.mkdirSync(apiPath, { recursive: true });
+            }
+            file.pipe(fs_1.default.createWriteStream(saveOrg));
         }
-        file.pipe(fs_1.default.createWriteStream(saveOrg));
+        else {
+            res.status(404).send('No file Recieved Please choose a file');
+        }
     });
     busboy.on('field', (name, val) => {
         busboy.on('finish', () => {
@@ -68,11 +73,16 @@ routes.post('/', (req, res) => {
 });
 routes.get('/image', (req, res) => {
     const file = path_1.default.join(__dirname, `/api/thumb/${req.query.image}_${req.query.width}_${req.query.height}.${req.query.ext}`);
-    res.contentType('image/png');
-    res.type('png');
-    res.sendFile(file, {
-        maxAge: 2000,
-        dotfiles: 'allow',
-    });
+    if (fs_1.default.existsSync(file)) {
+        res.contentType('image/png');
+        res.type('png');
+        res.status(200).sendFile(file, {
+            maxAge: 36000,
+            dotfiles: 'allow',
+        });
+    }
+    else {
+        res.status(404).send('File Not Found');
+    }
 });
 exports.default = routes;

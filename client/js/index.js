@@ -13,16 +13,23 @@ window.onload = ()=>{
 
     async function uploadImage(e){
         e.preventDefault();
+        // if(imageName.files[0]){
+            let response = await fetch('/api', {
+                method: 'POST',
+                body: new FormData(form)
+            })
 
-        let response = await fetch('/api', {
-            method: 'POST',
-            body: new FormData(form)
-        })
-
-        let result = await response.text()
-        window.location.href=result
+            let result = await response.text()
+            if(response.status === 301) {
+                window.location.href=result
+            } else {
+                fileName.classList.remove('hide')
+                fileName.textContent = result
+            }
+        // } else {
+            fileName.textContent = "Please, Choose a file"
+        // }
     }
-
 
     btn.addEventListener('click',uploadImage)
 }

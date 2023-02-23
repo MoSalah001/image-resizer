@@ -25,25 +25,29 @@ routes.post('/', (req, res) => {
   const busboy = Busboy({ headers: req.headers });
   // "@ts-expect-error"
   busboy.on('file', (fieldname: string, file: any, filename: fileName) => {
-    const length = fs.readdirSync(apiPath).length;
-    const index = filename.filename.indexOf('.');
-    const ext = filename.filename.slice(index);
-    const imageName = `image-${length}`;
-    const saveOrg = path.join(
-      __dirname,
-      `/api/full-images/` + imageName + `${ext}`
-    );
-    fileData = {
-      path: saveOrg,
-      name: imageName,
-      width: 0,
-      height: 0,
-      ext: ext,
-    };
-    if (!fs.existsSync(apiPath)) {
-      fs.mkdirSync(apiPath, { recursive: true });
+    if (filename.filename) {
+      const length = fs.readdirSync(apiPath).length;
+      const index = filename.filename.indexOf('.');
+      const ext = filename.filename.slice(index);
+      const imageName = `image-${length}`;
+      const saveOrg = path.join(
+        __dirname,
+        `/api/full-images/` + imageName + `${ext}`
+      );
+      fileData = {
+        path: saveOrg,
+        name: imageName,
+        width: 0,
+        height: 0,
+        ext: ext,
+      };
+      if (!fs.existsSync(apiPath)) {
+        fs.mkdirSync(apiPath, { recursive: true });
+      }
+      file.pipe(fs.createWriteStream(saveOrg));
+    } else {
+      res.status(404).send('No file Recieved Please choose a file');
     }
-    file.pipe(fs.createWriteStream(saveOrg));
   });
   busboy.on('field', (name: string, val: string) => {
     busboy.on('finish', () => {
@@ -77,12 +81,16 @@ routes.get('/image', (req, res) => {
     __dirname,
     `/api/thumb/${req.query.image}_${req.query.width}_${req.query.height}.${req.query.ext}`
   );
-  res.contentType('image/png');
-  res.type('png');
-  res.sendFile(file, {
-    maxAge: 2000,
-    dotfiles: 'allow',
-  });
+  if (fs.existsSync(file)) {
+    res.contentType('image/png');
+    res.type('png');
+    res.status(200).sendFile(file, {
+      maxAge: 36000,
+      dotfiles: 'allow',
+    });
+  } else {
+    res.status(404).send('File Not Found');
+  }
 });
 
 export default routes;

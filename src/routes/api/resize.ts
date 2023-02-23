@@ -1,6 +1,7 @@
 import fs from 'fs';
 import sharp from 'sharp';
 import path from 'path';
+
 interface fileData {
   path: string;
   name: string;
