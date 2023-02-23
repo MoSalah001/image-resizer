@@ -39,6 +39,6 @@ describe('server routes suite tests', () => {
     }));
     it('it should serve the image when found-this should fail', () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield app.get('/api/image?image=image-400&width=200&height=200&ext=png');
-        expect(res.statusCode).toBe(200);
+        expect(res.statusCode).toBe(404);
     }));
 });

@@ -41,3 +41,7 @@ To start the server after the build use
 ```
 node dist/server.js
 ```
+A request sample to test 
+```
+http:\/\/localhost:3000/api/image?image=image-0&width=400&height=400&ext=jpg
+```

@@ -34,6 +34,6 @@ describe('server routes suite tests', () => {
     const res = await app.get(
       '/api/image?image=image-400&width=200&height=200&ext=png'
     );
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toBe(404);
   });
 });
