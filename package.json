@@ -9,7 +9,8 @@
     "build": "npx tsc",
     "jasmine": "jasmine",
     "test": "npm run build && npm run jasmine",
-    "start": "nodemon src/server.ts"
+    "dev": "nodemon src/server.ts",
+    "start": "npm run build & node dist/server.js"
   },
   "author": "Mohamed Salah-Eldeen Mahmoud <mhmdsalah707@gmail.com>",
   "license": "ISC",
