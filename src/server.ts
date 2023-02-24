@@ -4,7 +4,7 @@ import path from 'path';
 
 const app = express();
 const host = process.env.HOST || '0.0.0.0'
-const port = process.env.PORT || 3000;
+const port: any  = process.env.PORT || 3000;
 
 app.use(express.static(path.dirname(__dirname) + '/client'));
 
