@@ -76,18 +76,44 @@ routes.post('/', (req: express.Request, res: express.Response): object => {
   return req.pipe(busboy);
 });
 
-routes.get('/image', (req: express.Request, res: express.Response): void => {
+routes.get('/image', (req: any, res: any): void => {
+  const imageObj: fileData = {
+    name: req.query.image,
+    width: parseInt(req.query.width),
+    height: parseInt(req.query.height),
+    ext: "."+req.query.ext,
+    path: ""
+  } 
+  
+  
   const file = path.join(
     __dirname,
-    `/api/thumb/${req.query.image}_${req.query.width}_${req.query.height}.${req.query.ext}`
+    `/api/thumb/${imageObj.name}_${imageObj.width}_${imageObj.height}${imageObj.ext}`
   );
+  const fileOrigin = path.join(__dirname,`/api/full-images/${imageObj.name}${imageObj.ext}`)
   if (fs.existsSync(file)) {
-    res.contentType('image/png');
-    res.type('png');
+    
+    res.contentType(`image/${imageObj.ext.slice(1)}`);
     res.status(200).sendFile(file, {
       maxAge: 36000,
       dotfiles: 'allow',
     });
+  } else if(fs.existsSync(fileOrigin)){
+    
+    imageObj.path = fileOrigin
+    setImmediate(async () =>{      
+      await resize(imageObj)
+      .then(()=>{
+        setTimeout(()=>{
+          res.contentType(`image/${imageObj.ext.slice(1)}`)
+          res.status(200).sendFile(file, {
+          maxAge: 36000,
+          dotfiles: 'allow',
+          });
+        },2000)
+      })        
+    })
+    
   } else {
     res.status(404).send('File Not Found');
   }

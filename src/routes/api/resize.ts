@@ -10,6 +10,7 @@ interface fileData {
   ext: string;
 }
 export default async function resize(obj: fileData) {
+  
   const destPath = path.join(
     __dirname,
     `thumb\\${obj.name}_${obj.width}_${obj.height}${obj.ext}`
