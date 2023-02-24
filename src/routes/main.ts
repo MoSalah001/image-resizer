@@ -115,7 +115,7 @@ routes.get('/image', (req: any, res: any): void => {
     })
     
   } else {
-    res.status(404).send('File Not Found');
+    res.status(404).send('File Not Found. Please enter a valid image name, width, and height');
   }
 });
 
