@@ -11,16 +11,20 @@ interface fileData {
 }
 export default async function resize(obj: fileData) {
   
-  const destPath = path.join(
-    __dirname,"thumb",
-    `${obj.name}_${obj.width}_${obj.height}${obj.ext}`
-  );
+  // const destPath = path.join(
+  //   __dirname,"thumb",
+  //   `${obj.name}_${obj.width}_${obj.height}${obj.ext}`
+  // );
 
   const checkPath = path.join(__dirname, "thumb");
 
   if (!fs.existsSync(checkPath)) {
     fs.mkdirSync(checkPath, { recursive: true });
   }
+  console.log(checkPath);
+  console.log(__filename);
+  
+  
   fs.readFile(obj.path, (err, data) => {
     if (err) {
       return `Error: ${err}`;
@@ -32,7 +36,7 @@ export default async function resize(obj: fileData) {
           background: { r: 255, g: 255, b: 255, alpha: 0 },
         })
         .toFormat(`${obj.ext.slice(1)}`, { mozjpeg: true })
-        .toFile(destPath);
+        .toFile(checkPath+`/${obj.name}_${obj.width}_${obj.height}${obj.ext}`);
     }
   });
   return obj;
