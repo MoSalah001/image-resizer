@@ -16,7 +16,7 @@ export default async function resize(obj: fileData) {
     `${obj.name}_${obj.width}_${obj.height}${obj.ext}`
   );
 
-  const checkPath = path.join(__dirname, `thumb`);
+  const checkPath = path.join(__dirname, "thumb");
 
   if (!fs.existsSync(checkPath)) {
     fs.mkdirSync(checkPath, { recursive: true });
