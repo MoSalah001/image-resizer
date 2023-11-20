@@ -17,7 +17,7 @@ const sharp_1 = __importDefault(require("sharp"));
 const path_1 = __importDefault(require("path"));
 function resize(obj) {
     return __awaiter(this, void 0, void 0, function* () {
-        const destPath = path_1.default.join(__dirname, `thumb`,`${obj.name}-${obj.width}-${obj.height}${obj.ext}`);
+        const destPath = path_1.default.join(__dirname, `thumb\\${obj.name}-${obj.width}-${obj.height}${obj.ext}`);
         const checkPath = path_1.default.join(__dirname, `thumb`);
         if (!fs_1.default.existsSync(checkPath)) {
             fs_1.default.mkdirSync(checkPath, { recursive: true });

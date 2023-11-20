@@ -12,8 +12,8 @@ interface fileData {
 export default async function resize(obj: fileData) {
   
   const destPath = path.join(
-    __dirname,
-    `thumb\\${obj.name}_${obj.width}_${obj.height}${obj.ext}`
+    __dirname,"thumb",
+    `${obj.name}_${obj.width}_${obj.height}${obj.ext}`
   );
 
   const checkPath = path.join(__dirname, `thumb`);
