@@ -21,6 +21,7 @@ window.onload = ()=>{
     async function uploadImage(e){
         e.preventDefault();
         btn.setAttribute("disabled",'true')
+        btn.textContent="Uploading ..."
         toggleBar()
         // if(imageName.files[0]){
             let response = await fetch('/api', {
@@ -34,6 +35,7 @@ window.onload = ()=>{
                 fileName.classList.remove('hide')
                 fileName.textContent = result
                 btn.removeAttribute('disabled')
+                btn.textContent="Submit"
                 toggleBar()
             }
         // } else {
