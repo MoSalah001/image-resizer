@@ -1,0 +1,13 @@
+name: Auto Deploy to CPanel
+on:
+  push:
+    branches:
+    - main
+  jobs:
+  FTP-Deploy-Action:
+  name: FTP-Deploy-Action
+  with:
+  ftp-server: ${{secrets.FTP_SERVER}}
+  ftp-username: ${{secrets.FTP_ACCOUNT}}
+  ftp-password: ${{secrets.FTP_PASSWORD}}
+  
