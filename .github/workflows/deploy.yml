@@ -15,8 +15,7 @@ jobs:
       - name: sync Code
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          ftp-server: ${{secrets.FTP_SERVER}}
-          ftp-username: ${{secrets.FTP_ACCOUNT}}
-          ftp-password: ${{secrets.FTP_PASSWORD}}
-          ftp-server-dir: ${{secrets.FTP_SERVER_DIR}}
+          server: ${{secrets.FTP_SERVER}}
+          username: ${{secrets.FTP_ACCOUNT}}
+          password: ${{secrets.FTP_PASSWORD}}
   
