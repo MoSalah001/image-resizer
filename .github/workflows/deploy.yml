@@ -1,13 +1,21 @@
-name: Auto Deploy to CPanel
+
 on:
   push:
     branches:
-    - main
-  jobs:
-  FTP-Deploy-Action:
-  name: FTP-Deploy-Action
-  with:
-  ftp-server: ${{secrets.FTP_SERVER}}
-  ftp-username: ${{secrets.FTP_ACCOUNT}}
-  ftp-password: ${{secrets.FTP_PASSWORD}}
+      - main
+name: Deploy to CPanel
+jobs:
+  web-deploy:
+    name: deploy Cpanel
+    runs-on: ubuntu-latest
+    steps:
+      - name: get latest code
+        uses: actions/checkout@v2.3.2
+
+      - name: sync Code
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          ftp-server: ${{secrets.FTP_SERVER}}
+          ftp-username: ${{secrets.FTP_ACCOUNT}}
+          ftp-password: ${{secrets.FTP_PASSWORD}}
   
