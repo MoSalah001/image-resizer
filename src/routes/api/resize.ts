@@ -20,10 +20,7 @@ export default async function resize(obj: fileData) {
 
   if (!fs.existsSync(checkPath)) {
     fs.mkdirSync(checkPath, { recursive: true });
-  }
-  console.log(checkPath);
-  console.log(__filename);
-  
+  }  
   
   fs.readFile(obj.path, (err, data) => {
     if (err) {

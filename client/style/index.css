@@ -125,3 +125,36 @@ button:hover {
 .hide {
     display: none;
 }
+
+#loading-bar {
+    width: 15%;
+    font-size: 20px;
+    padding: 5px;
+    margin: 0 auto;
+    text-align: center;
+    background-image: linear-gradient(5deg,red,yellow,red,yellow);
+    animation: progress 2s infinite;
+    border-radius: 25px;
+    font-weight: 600;
+}
+
+@keyframes progress {
+    0%{
+        background-image: linear-gradient(45deg,red,yellow,red,yellow,red,yellow,red,yellow,red,yellow,red,yellow);
+    }
+    75% {
+        background-image: linear-gradient(45deg,yellow,red,yellow,red,yellow,red,yellow,red,yellow,red,yellow,red);
+    }
+    100%{
+        background-image: linear-gradient(45deg,red,yellow,red,yellow,red,yellow,red,yellow,red,yellow,red,yellow);  
+    }
+}
+
+@media only screen and (max-width:632px) {
+    form {
+        max-width: 100%;
+    }
+    input[type="file"]::before {
+        left: 21%;
+    }
+}
