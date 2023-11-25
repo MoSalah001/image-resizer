@@ -18,4 +18,5 @@ jobs:
           ftp-server: ${{secrets.FTP_SERVER}}
           ftp-username: ${{secrets.FTP_ACCOUNT}}
           ftp-password: ${{secrets.FTP_PASSWORD}}
+          ftp-server-dir: ${{secrets.FTP_SERVER_DIR}}
   
