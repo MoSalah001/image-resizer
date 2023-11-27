@@ -3,6 +3,7 @@
 ### mainly Sharp is used as image proccessor .
 #### You may lossely compress and resize your images fast and easy
 #### Accepted image formats: ( jpg, jpeg, png )
+## Preview Link : [here](https://imgresize.devmosalah.com/)
 to install the packages use 
 ```
 npm install
